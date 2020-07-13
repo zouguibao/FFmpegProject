@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.ffmpegproject.record.view.AspectGLSurfaceView
+        android:id="@+id/camera_textureview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/capture_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ugc_capture_record_start_uncheck"
+        />
+</FrameLayout>

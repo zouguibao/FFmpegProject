@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <SurfaceView
+            android:id="@+id/surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            />
+        <com.example.ffmpegproject.opengles.MyGLSurfaceView
+            android:id="@+id/my_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:visibility="gone"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="#50000000">
+
+            <TextView
+                android:id="@+id/current_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:text="00:00"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/total_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:gravity="right"
+                android:text="00:00"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+            <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="5dp"
+                android:max="100"
+                android:progress="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/total_time_view"
+                android:layout_toRightOf="@+id/current_time_view"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play Video"
+        android:onClick="playVideo"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play Audio"
+        android:onClick="playAudio"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/play_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        />
+
+    <Button
+        android:id="@+id/pause_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        />
+
+    <Button
+        android:id="@+id/stop_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seek To 30 Second"
+        android:onClick="seekTo"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

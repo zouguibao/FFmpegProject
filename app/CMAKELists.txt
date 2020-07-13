@@ -1,0 +1,118 @@
+# Sets the minimum version of CMake required to build the native
+# library. You should either keep the default value or only pass a
+# value of 3.4.0 or lower.
+
+cmake_minimum_required(VERSION 3.4.1)
+
+add_library(native-lib
+        SHARED
+        src/main/cpp/ffplay.c
+        src/main/cpp/video/VideoStatus.cpp
+        src/main/cpp/video/VideoFrameQueue.cpp
+        src/main/cpp/video/VideoJavaCall.cpp
+        src/main/cpp/video/VideoBasePlayer.cpp
+        src/main/cpp/video/VAudioChannel.cpp
+        src/main/cpp/video/VAudio.cpp
+        src/main/cpp/video/VVideo.cpp
+        src/main/cpp/video/VFFmpeg.cpp
+        src/main/cpp/video/VideoPlayer.cpp
+        src/main/cpp/native-lib.cpp
+        src/main/cpp/myvideo/Player.cpp
+        src/main/cpp/record/recordvideo.cpp
+        src/main/cpp/record/thread.cpp
+        src/main/cpp/record/matrix.cpp
+        src/main/cpp/record/handler.cpp
+        src/main/cpp/record/message_queue.cpp
+        src/main/cpp/record/opensl_es_context.cpp
+        src/main/cpp/record/opengl_media/movie_frame.cpp
+        src/main/cpp/record/opengl_media/render/video_gl_surface_render.cpp
+        src/main/cpp/record/opengl_media/texture/gpu_texture_frame.cpp
+        src/main/cpp/record/opengl_media/texture/texture_frame.cpp
+        src/main/cpp/record/opengl_media/texture/yuv_texture_frame.cpp
+        src/main/cpp/record/opengl_media/texture_copier/gpu_texture_frame_copier.cpp
+        src/main/cpp/record/opengl_media/texture_copier/texture_frame_copier.cpp
+        src/main/cpp/record/opengl_media/texture_copier/yuv_texture_frame_copier.cpp
+
+        src/main/cpp/record/egl_core/egl_core.cpp
+        src/main/cpp/record/egl_core/egl_share_context.cpp
+        )
+
+find_library( # Sets the name of the path variable.
+        log-lib
+        # Specifies the name of the NDK library that
+        # you want CMake to locate.
+        log)
+find_library(
+             android-lib
+             android)
+set(distribution_DIR ${CMAKE_SOURCE_DIR}/../../../../libs)
+
+add_library(avutil-55
+        SHARED
+        IMPORTED)
+set_target_properties(avutil-55
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libavutil.so)
+
+add_library(swresample-2
+        SHARED
+        IMPORTED)
+set_target_properties(swresample-2
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libswresample.so)
+add_library(avcodec-57
+        SHARED
+        IMPORTED)
+set_target_properties(avcodec-57
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libavcodec.so)
+add_library(avfilter-6
+        SHARED
+        IMPORTED)
+set_target_properties(avfilter-6
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libavfilter.so)
+add_library(swscale-4
+        SHARED
+        IMPORTED)
+set_target_properties(swscale-4
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libswscale.so)
+
+add_library(avformat-57
+        SHARED
+        IMPORTED)
+set_target_properties(avformat-57
+        PROPERTIES IMPORTED_LOCATION
+        ../../../../libs/armeabi-v7a/libavformat.so)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
+
+#add_library(png-lib
+#        SHARED
+#        src/main/cpp/libpng/pngdebug.h
+#        src/main/cpp/libpng/pnginfo.h
+#        src/main/cpp/libpng/pngpriv.h
+#        src/main/cpp/libpng/pngstruct.h
+#        src/main/cpp/libpng/png.c
+#        src/main/cpp/libpng/pngerror.c
+#        src/main/cpp/libpng/pngget.c
+#        src/main/cpp/libpng/pngmem.c
+#        src/main/cpp/libpng/pngpread.c
+#        src/main/cpp/libpng/pngread.c
+#        src/main/cpp/libpng/pngrio.c
+#        src/main/cpp/libpng/pngrtran.c
+#        src/main/cpp/libpng/pngrutil.c
+#        src/main/cpp/libpng/pngset.c
+#        src/main/cpp/libpng/pngtrans.c
+#        src/main/cpp/libpng/pngwio.c
+#        src/main/cpp/libpng/pngwrite.c
+#        src/main/cpp/libpng/pngwtran.c
+#        src/main/cpp/libpng/pngwutil.c
+#)
+include_directories(libs/include)
+#target_include_directories(native-lib PRIVATE libs/include)
+target_link_libraries(native-lib avformat-57 avcodec-57 avfilter-6 avutil-55 swresample-2 swscale-4
+        ${log-lib} -landroid -latomic -lm -lOpenSLES -lz -lGLESv2 -lEGL)
+#-ljnigraphics -lOpenSLES png-lib
